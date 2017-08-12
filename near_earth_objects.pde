@@ -1,5 +1,3 @@
-import java.util.Iterator;
-
 Settings settings;
 Asteroids asteroids;
 

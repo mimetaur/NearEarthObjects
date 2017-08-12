@@ -34,11 +34,12 @@ class PlayScene {
 		plotField(asteroid.diameter, 1, 283);
 		plotField(asteroid.isPotentiallyHazardous, 1, 426);
 		plotField(asteroid.relativeVelocity, 1, 569);
-		plotField(asteroid.closeApproachDate, 1, 713);
-		plotField(asteroid.missDistance, 1, 856);
+		plotField(asteroid.missDistance, 1, 711);
 
 		// column 2
 		plotField(asteroid.magnitude, 2, 283);
+		plotField(asteroid.orbitalEccentricity, 2, 426);
+		plotField(asteroid.closeApproachDate, 2, 569);
 	}
 
 	private void plotField(AsteroidDataField field, int column, int yOffset) {

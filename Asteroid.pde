@@ -6,6 +6,7 @@ class Asteroid {
 	public AsteroidDataField<Float> relativeVelocity;
 	public AsteroidDataField<Float> closeApproachDate;
 	public AsteroidDataField<Float> missDistance;
+	public AsteroidDataField<Float> orbitalEccentricity;
 
 	Asteroid(JSONObject asteroidAsJson) {
 		name = addDataField("name", asteroidAsJson.getString("name"));
@@ -26,6 +27,9 @@ class Asteroid {
 
 		float missd = closeApproachData.getJSONObject(0).getJSONObject("miss_distance").getFloat("kilometers");
 		missDistance = addDataField("miss distance", missd, "kilometers");
+
+		JSONObject orbitalData = asteroidAsJson.getJSONObject("orbital_data");
+		orbitalEccentricity = addDataField("miss distance", orbitalData.getFloat("eccentricity"));
 	}
 
 	public String toString() {

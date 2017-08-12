@@ -34,6 +34,9 @@ void draw() {
 
 void keyPressed() {
 	performance.handleKey(key);
+	if (key == ESC) {
+		key = 0;
+	}
 }
 
 float calculateXForItemAt(int value) {

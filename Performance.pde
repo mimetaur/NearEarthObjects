@@ -49,12 +49,20 @@ class Performance {
 		}
 	}
 
-	public void handleKey(int keyp) {
+	public void handleKey(char keyp) {
 		switch (keyp) {
 			case ' ':
 				if (curScene == Scenes.INTRO) {
 					curScene = Scenes.PLAY;
 					println("Switching to Play Scene");
+				}
+				break;
+			case ESC:
+				if (curScene == Scenes.END) {
+					exit();
+				} else {
+					curScene = Scenes.END;
+					println("Switching to End Scene");
 				}
 				break;
 		}

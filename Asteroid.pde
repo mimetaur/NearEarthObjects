@@ -3,6 +3,9 @@ class Asteroid {
 	public AsteroidDataField<Float> magnitude;
 	public AsteroidDataField<Float> diameter;
 	public AsteroidDataField<Boolean> isPotentiallyHazardous;
+	public AsteroidDataField<Float> relativeVelocity;
+	public AsteroidDataField<Float> closeApproachDate;
+	public AsteroidDataField<Float> missDistance;
 
 	Asteroid(JSONObject asteroidAsJson) {
 		name = addDataField("name", asteroidAsJson.getString("name"));
@@ -12,6 +15,17 @@ class Asteroid {
 		diameter = addDataField("estimated diameter", calculateMidpoint("estimated_diameter_min", "estimated_diameter_min", asteroidAsJson.getJSONObject("estimated_diameter").getJSONObject("kilometers")), "kph");
 
 		isPotentiallyHazardous = addDataField("potentially hazardous?", asteroidAsJson.getBoolean("is_potentially_hazardous_asteroid"));
+
+		JSONArray closeApproachData = asteroidAsJson.getJSONArray("close_approach_data");
+
+		float relVel = closeApproachData.getJSONObject(0).getJSONObject("relative_velocity").getFloat("kilometers_per_second");
+		relativeVelocity = addDataField("relative velocty", relVel, "kps");
+
+		float epochApproachDate = closeApproachData.getJSONObject(0).getFloat("epoch_date_close_approach");
+		closeApproachDate = addDataField("epoch date of close approach", epochApproachDate);
+
+		float missd = closeApproachData.getJSONObject(0).getJSONObject("miss_distance").getFloat("kilometers");
+		missDistance = addDataField("miss distance", missd, "kilometers");
 	}
 
 	public String toString() {

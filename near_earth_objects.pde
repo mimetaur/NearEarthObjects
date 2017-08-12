@@ -1,5 +1,4 @@
 Settings settings;
-Asteroids asteroids;
 Performance performance;
 
 PFont medFont, largeFont;
@@ -20,9 +19,8 @@ void setup() {
 	// JSONObject json = loadJSONObject( settings.get("NASA_ENDPOINT_URL") + settings.get("NASA_API_KEY"));
 	JSONObject feed = loadJSONObject("feed.json");
 	FeedParser parser = new FeedParser(feed);
-	asteroids = new Asteroids( parser.parseNasaFeedToAsteroidCollection() );
 
-	performance = new Performance();
+	performance = new Performance( new Asteroids( parser.parseNasaFeedToAsteroidCollection() ) );
 }
 
 void draw() {

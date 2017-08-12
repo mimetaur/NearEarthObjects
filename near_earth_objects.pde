@@ -1,6 +1,6 @@
 Settings settings;
 Asteroids asteroids;
-Scene scene;
+Performance performance;
 
 void setup() {
 	settings = new Settings("settings.json");
@@ -13,11 +13,15 @@ void setup() {
 	FeedParser parser = new FeedParser(feed);
 	asteroids = new Asteroids( parser.parseNasaFeedToAsteroidCollection() );
 
-	scene = new Scene();
+	performance = new Performance();
+}
 
-	exit(); // temporary while i'm working on data parsing
+void draw() {
+	background(0);
+	performance.update();
+	performance.draw();
 }
 
 void keyPressed() {
-	scene.handleKeyPress(key);
+	performance.handleKey(key);
 }

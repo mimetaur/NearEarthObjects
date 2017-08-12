@@ -30,3 +30,4 @@ web-export/
 # Settings files                #
 #################################
 settings.json
+data/feed.json

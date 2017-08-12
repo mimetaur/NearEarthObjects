@@ -25,3 +25,8 @@ applet
 application.macosx
 build-tmp/
 web-export/
+
+#################################
+# Settings files                #
+#################################
+settings.json

@@ -6,5 +6,10 @@ class Asteroids {
 			Asteroid asteroid = new Asteroid(asteroidsJson.getJSONObject(i));
 			asteroids.add(asteroid);
 		}
+		println(asteroids);
+	}
+
+	Asteroid get(int index) {
+		return asteroids.get(index);
 	}
 }

@@ -18,19 +18,19 @@ class IntroScene {
 		textAlign(CENTER);
 		textFont(largeFont);
 		fill(brightGreen);
-		text(title, width/2, height * (260.0 / 1080.0) );
+		text( title, width/2, calculateYForItemAt(260) );
 
 		// draw subtitle
 		fill(darkGreen);
 		textFont(medFont);
-		text(subtitle, width/2, height * (771.0 / 1080.0) );
+		text( subtitle, width/2, calculateYForItemAt(722) );
 
 		// draw C-T-A
 		fill(brightGreen);
-		text(callToAction, width/2, height * (722.0 / 1080.0) );
+		text( callToAction, width/2, calculateYForItemAt(771) );
 
 		// draw logo
-		shape(logo, width * (885.0 / width1080p), height * (361.0 / height1080p) );
+		shape(logo, width * (885.0 / WIDTH_1080P), height * (361.0 / HEIGHT_1080P) );
 
 	}
 }

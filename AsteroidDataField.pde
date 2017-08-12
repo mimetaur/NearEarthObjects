@@ -29,9 +29,9 @@ public class AsteroidDataField<T> {
 	public String toString() {
 		String output;
 		if (units != null) {
-			output = fieldName + ": " + fieldValue.toString() + " " + units;
+			output = fieldValue.toString() + " " + units;
 		} else {
-			output = fieldName + ": " + fieldValue.toString();
+			output = fieldValue.toString();
 		}
 		return output;
 	}

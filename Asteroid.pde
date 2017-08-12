@@ -1,23 +1,17 @@
 class Asteroid {
-	private ArrayList<AsteroidDataField> asteroidDataFields;
-	private AsteroidDataField<String> name;
-	private AsteroidDataField<Float> magnitude;
-	private AsteroidDataField<Float> diameter;
-	private AsteroidDataField<Boolean> isPotentiallyHazardous;
+	public AsteroidDataField<String> name;
+	public AsteroidDataField<Float> magnitude;
+	public AsteroidDataField<Float> diameter;
+	public AsteroidDataField<Boolean> isPotentiallyHazardous;
 
 	Asteroid(JSONObject asteroidAsJson) {
 		name = addDataField("name", asteroidAsJson.getString("name"));
-		magnitude = addDataField("magnitude", asteroidAsJson.getFloat("absolute_magnitude_h"), "h");
+		magnitude = addDataField("absolute magnitude (h)", asteroidAsJson.getFloat("absolute_magnitude_h"));
 
 		// note - all values use kilometers when a choice is given in API
-		diameter = addDataField("diameter", calculateMidpoint("estimated_diameter_min", "estimated_diameter_min", asteroidAsJson.getJSONObject("estimated_diameter").getJSONObject("kilometers")), "kph");
+		diameter = addDataField("estimated diameter", calculateMidpoint("estimated_diameter_min", "estimated_diameter_min", asteroidAsJson.getJSONObject("estimated_diameter").getJSONObject("kilometers")), "kph");
 
-		isPotentiallyHazardous = addDataField("is potentially hazardous?", asteroidAsJson.getBoolean("is_potentially_hazardous_asteroid"));
-		println(this);
-		println(magnitude);
-		println(diameter);
-		println(isPotentiallyHazardous);
-		println();
+		isPotentiallyHazardous = addDataField("potentially hazardous?", asteroidAsJson.getBoolean("is_potentially_hazardous_asteroid"));
 	}
 
 	public String toString() {

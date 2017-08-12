@@ -5,8 +5,11 @@ PFont medFont, largeFont;
 color brightGreen = color(126, 211, 33);
 color darkGreen = color(65, 117, 5);
 
-final float width1080p = 1920.0;
-final float height1080p = 1080.0;
+// x and y calculations are based on comps
+// modeled after responsive design
+// should allow for flexible screen size
+final float WIDTH_1080P = 1920.0;
+final float HEIGHT_1080P = 1080.0;
 
 void setup() {
 	settings = new Settings("settings.json");
@@ -31,4 +34,12 @@ void draw() {
 
 void keyPressed() {
 	performance.handleKey(key);
+}
+
+float calculateXForItemAt(int value) {
+	return width * ( (float)value / WIDTH_1080P);
+}
+
+float calculateYForItemAt(int value) {
+	return height * ( (float)value / HEIGHT_1080P);
 }

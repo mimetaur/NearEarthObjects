@@ -3,13 +3,17 @@ class Performance {
 	private IntroScene introScene;
 	private PlayScene playScene;
 	private EndScene endScene;
+
 	private Asteroids asteroids;
+	private Asteroid curAsteroid;
 
 	Performance(Asteroids _asteroids) {
 		asteroids = _asteroids;
+		curAsteroid = _asteroids.get(0);
+
 		curScene = Scenes.INTRO;
 		introScene = new IntroScene();
-		playScene = new PlayScene();
+		playScene = new PlayScene(curAsteroid);
 		endScene = new EndScene();
 	}
 

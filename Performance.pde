@@ -5,6 +5,7 @@ class Performance {
 	private EndScene endScene;
 
 	Performance() {
+
 		curScene = Scenes.INTRO;
 		introScene = new IntroScene();
 		playScene = new PlayScene();
@@ -44,11 +45,13 @@ class Performance {
 	}
 
 	public void handleKey(int keyp) {
-		if (keyp == ' ') {
-			if (curScene == Scenes.INTRO) {
-				curScene = Scenes.PLAY;
-				println("Switching to Play Scene");
-			}
+		switch (keyp) {
+			case ' ':
+				if (curScene == Scenes.INTRO) {
+					curScene = Scenes.PLAY;
+					println("Switching to Play Scene");
+				}
+				break;
 		}
 	}
 }

@@ -1,0 +1,10 @@
+[
+	{
+		"key": "NASA_ENDPOINT_URL",
+		"value": "https://api.nasa.gov/neo/rest/v1/feed/today?detailed=true&api_key="
+	},
+	{
+		"key": "NASA_API_KEY",
+		"value": "MY_API_KEY_GOES_HERE"
+	}
+]

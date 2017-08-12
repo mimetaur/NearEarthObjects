@@ -24,7 +24,7 @@ class FeedParser {
 		String date = (String)neoJson.keys().toArray()[0];
 		JSONArray asteroids = neoJson.getJSONArray(date);
 
-		println("Number of asteroids: " + asteroids.size() );
+		println("Number of asteroids in JSON feed: " + asteroids.size() );
 
 		return asteroids;
 	}

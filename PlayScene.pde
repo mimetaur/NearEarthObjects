@@ -6,9 +6,6 @@ class PlayScene {
 	final private int COLUMN_1_X_OFFSET = 463;
 	final private int COLUMN_2_X_OFFSET = 1081;
 
-	// to be able to easily offset new lines in text
-	final int MEDIUM_LINE_HEIGHT = 49;
-
 	PlayScene(Asteroid _asteroid) {
 		asteroid = _asteroid;
 		miniLogo = loadShape("mini_logo.svg");

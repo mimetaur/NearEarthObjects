@@ -11,6 +11,9 @@ color darkGreen = color(65, 117, 5);
 final float WIDTH_1080P = 1920.0;
 final float HEIGHT_1080P = 1080.0;
 
+// to be able to easily offset new lines in text
+final int MEDIUM_LINE_HEIGHT = 49;
+
 void setup() {
 	settings = new Settings("settings.json");
 	size( 1920, 1080 );

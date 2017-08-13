@@ -27,6 +27,11 @@ class PlayScene {
 		playButton = loadShape("play_button.svg");
 		playButton.disableStyle();
 		pauseButton.disableStyle();
+		asteroidChanged();
+	}
+
+	private void asteroidChanged() {
+		currentAsteroid.outputAsOsc();
 	}
 
 	public void togglePlay() {
@@ -39,17 +44,17 @@ class PlayScene {
 
 	private void hitPlay() {
 		nowPlaying = true;
-		currentAsteroid.outputAsOsc();
-		OscMessage play = new OscMessage("play");
-		play.add(1);
-		oscP5.send(play, remoteLocation);
+		OscMessage playMsg = new OscMessage("/play");
+		playMsg.add("1");
+		println(playMsg);
+		oscP5.send(playMsg, remoteLocation);
 	}
 
 	private void hitPause() {
 		nowPlaying = false;
-		OscMessage pause = new OscMessage("play");
-		pause.add(0);
-		oscP5.send(pause, remoteLocation);
+		OscMessage pauseMsg = new OscMessage("/pause");
+		pauseMsg.add("1");
+		oscP5.send(pauseMsg, remoteLocation);
 	}
 
 	public void nextAsteroid() {
@@ -59,6 +64,7 @@ class PlayScene {
 		} else {
 			currentAsteroid = asteroids.get( index + 1);
 		}
+		asteroidChanged();
 	}
 
 	public void prevAsteroid() {
@@ -68,6 +74,7 @@ class PlayScene {
 		} else {
 			currentAsteroid = asteroids.get( index - 1);
 		}
+		asteroidChanged();
 	}
 
 	public void update() {
@@ -79,14 +86,14 @@ class PlayScene {
 	public void draw() {
 		// draw buttons
 		if (nowPlaying) {
-			fill(darkGreen);
-			shape( playButton, calculateXForItemAt(1081), calculateYForItemAt(123) );
 			fill(brightGreen);
+			shape( playButton, calculateXForItemAt(1081), calculateYForItemAt(123) );
+			fill(darkGreen);
 			shape( pauseButton, calculateXForItemAt(1163), calculateYForItemAt(124) );
 		} else {
-			fill(brightGreen);
-			shape( playButton, calculateXForItemAt(1081), calculateYForItemAt(123) );
 			fill(darkGreen);
+			shape( playButton, calculateXForItemAt(1081), calculateYForItemAt(123) );
+			fill(brightGreen);
 			shape( pauseButton, calculateXForItemAt(1163), calculateYForItemAt(124) );
 		}
 		// draw instructions

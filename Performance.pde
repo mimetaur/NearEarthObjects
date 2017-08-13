@@ -7,18 +7,14 @@ class Performance {
 	private EndScene endScene;
 
 	private Asteroids asteroids;
-	private int curAsteroidNum;
-	private Asteroid curAsteroid;
 
 	Performance(Asteroids _asteroids) {
-		curAsteroidNum = (int)random(_asteroids.size());
 		asteroids = _asteroids;
-		curAsteroid = _asteroids.get(curAsteroidNum);
 
 		curScene = Scenes.INTRO;
 		introScene = new IntroScene();
-		welcomeScene = new WelcomeScene();
-		playScene = new PlayScene(curAsteroid, _asteroids.size());
+		welcomeScene = new WelcomeScene(asteroids.size());
+		playScene = new PlayScene(asteroids);
 		endScene = new EndScene();
 	}
 
@@ -60,27 +56,30 @@ class Performance {
 		}
 	}
 
-	public void handleKey(char keyp) {
+	public void handleKey() {
 		// TODO - get the actual navigation to work
 		// change asteroid number based on keypress
-		switch (keyp) {
-			case ' ':
-				if (curScene == Scenes.INTRO) {
-					curScene = Scenes.WELCOME;
-					println("Switching to Welcome Scene");
-				} else if (curScene == Scenes.WELCOME) {
-					curScene = Scenes.PLAY;
-					println("Switching to Play Scene");
-				}
-				break;
-			case ESC:
-				if (curScene == Scenes.END) {
-					exit();
-				} else {
-					curScene = Scenes.END;
-					println("Switching to End Scene");
-				}
-				break;
+		if (key == ' ') {
+			if (curScene == Scenes.INTRO) {
+				curScene = Scenes.WELCOME;
+				println("Switching to Welcome Scene");
+			} else if (curScene == Scenes.WELCOME) {
+				curScene = Scenes.PLAY;
+				println("Switching to Play Scene");
+			}
+		} else if (key == ESC) {
+			if (curScene == Scenes.END) {
+				exit();
+			} else {
+				curScene = Scenes.END;
+				println("Switching to End Scene");
+			}
+		} else if (key == CODED) {
+			if (keyCode == LEFT) {
+				println("Left");
+			} else if (keyCode == RIGHT) {
+				println("Right");
+			}
 		}
 	}
 }

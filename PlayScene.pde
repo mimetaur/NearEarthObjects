@@ -1,18 +1,25 @@
+import java.text.MessageFormat;
+
 class PlayScene {
-	private Asteroid asteroid;
+	private Asteroids asteroids;
+	private Asteroid currentAsteroid;
+
 	private PShape miniLogo;
-	private int totalAsteroids;
 	private String asteroidNav;
 
 	// X offsets for plotting to two columns
 	final private int COLUMN_1_X_OFFSET = 463;
 	final private int COLUMN_2_X_OFFSET = 1081;
 
-	PlayScene(Asteroid _asteroid, int _totalAsteroids) {
-		asteroid = _asteroid;
+	PlayScene(Asteroids _asteroids) {
+		asteroids = _asteroids;
+		currentAsteroid = asteroids.get((int)random(asteroids.size()));
+
+		String navTemplate = "[{0}] OF [{1}]";
+		Object[] params = new Object[] { currentAsteroid.index + 1, asteroids.size() + 1 };
+		asteroidNav = MessageFormat.format(navTemplate, params);
+
 		miniLogo = loadShape("mini_logo.svg");
-		totalAsteroids = _totalAsteroids;
-		asteroidNav = "[" + asteroid.index + "] " + "OF" + " [" + totalAsteroids + "]";
 	}
 
 	public void update() {
@@ -31,20 +38,20 @@ class PlayScene {
 
 		// asteroid name
 		textFont(largeFont);
-		text( asteroid.name.toString(), calculateXForItemAt(463), calculateYForItemAt(127) );
+		text( currentAsteroid.name.toString(), calculateXForItemAt(463), calculateYForItemAt(127) );
 
 		// asteroid stats
 
 		// column 1
-		plotField(asteroid.diameter, 1, 283);
-		plotField(asteroid.isPotentiallyHazardous, 1, 426);
-		plotField(asteroid.relativeVelocity, 1, 569);
-		plotField(asteroid.missDistance, 1, 711);
+		plotField(currentAsteroid.diameter, 1, 283);
+		plotField(currentAsteroid.isPotentiallyHazardous, 1, 426);
+		plotField(currentAsteroid.relativeVelocity, 1, 569);
+		plotField(currentAsteroid.missDistance, 1, 711);
 
 		// column 2
-		plotField(asteroid.magnitude, 2, 283);
-		plotField(asteroid.orbitalEccentricity, 2, 426);
-		plotField(asteroid.closeApproachDate, 2, 569);
+		plotField(currentAsteroid.magnitude, 2, 283);
+		plotField(currentAsteroid.orbitalEccentricity, 2, 426);
+		plotField(currentAsteroid.closeApproachDate, 2, 569);
 	}
 
 	private void plotField(AsteroidDataField field, int column, int yOffset) {

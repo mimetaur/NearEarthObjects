@@ -3,7 +3,7 @@ Performance performance;
 
 PFont medFont, largeFont;
 color brightGreen = color(126, 211, 33);
-color lighterGreen = color(180, 236, 81);
+color semiDarkGreen = color(89, 161, 6);
 color darkGreen = color(65, 117, 5);
 
 // x and y calculations are based on comps
@@ -23,8 +23,8 @@ void setup() {
 	largeFont = loadFont("HydrophiliaIced-48.vlw");
 
 	// switch this over for production
-	// JSONObject json = loadJSONObject( settings.get("NASA_ENDPOINT_URL") + settings.get("NASA_API_KEY"));
-	JSONObject feed = loadJSONObject("feed.json");
+	JSONObject feed = loadJSONObject( settings.get("NASA_ENDPOINT_URL") + settings.get("NASA_API_KEY"));
+	// JSONObject feed = loadJSONObject("feed.json");
 	FeedParser parser = new FeedParser(feed);
 
 	performance = new Performance( new Asteroids( parser.parseNasaFeedToAsteroidCollection() ) );
@@ -37,7 +37,7 @@ void draw() {
 }
 
 void keyPressed() {
-	performance.handleKey(key);
+	performance.handleKey();
 	if (key == ESC) {
 		key = 0;
 	}

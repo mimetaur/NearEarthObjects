@@ -97,7 +97,6 @@ class PlayScene {
 			text( currentlyListening, calculateXForItemAt(463), calculateYForItemAt(96) );
 		}
 
-
 		// asteroid stats
 
 		// column 1

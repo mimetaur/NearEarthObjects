@@ -1,14 +1,18 @@
 class PlayScene {
 	private Asteroid asteroid;
 	private PShape miniLogo;
+	private int totalAsteroids;
+	private String asteroidNav;
 
 	// X offsets for plotting to two columns
 	final private int COLUMN_1_X_OFFSET = 463;
 	final private int COLUMN_2_X_OFFSET = 1081;
 
-	PlayScene(Asteroid _asteroid) {
+	PlayScene(Asteroid _asteroid, int _totalAsteroids) {
 		asteroid = _asteroid;
 		miniLogo = loadShape("mini_logo.svg");
+		totalAsteroids = _totalAsteroids;
+		asteroidNav = "[" + asteroid.index + "] " + "OF" + " [" + totalAsteroids + "]";
 	}
 
 	public void update() {
@@ -19,9 +23,13 @@ class PlayScene {
 		// draw logo
 		shape( miniLogo, calculateXForItemAt(364), calculateYForItemAt(113) );
 
-		// asteroid name
+		// nav
 		textAlign(LEFT, TOP);
 		fill(brightGreen);
+		textFont(medFont);
+		text( asteroidNav, calculateXForItemAt(269), calculateYForItemAt(206) );
+
+		// asteroid name
 		textFont(largeFont);
 		text( asteroid.name.toString(), calculateXForItemAt(463), calculateYForItemAt(127) );
 

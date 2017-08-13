@@ -8,7 +8,9 @@ class Asteroid {
 	public AsteroidDataField<Float> missDistance;
 	public AsteroidDataField<Float> orbitalEccentricity;
 
-	Asteroid(JSONObject asteroidAsJson) {
+	public int index;
+
+	Asteroid(JSONObject asteroidAsJson, int _index) {
 		name = addDataField("name", asteroidAsJson.getString("name"));
 		magnitude = addDataField("absolute magnitude (h)", asteroidAsJson.getFloat("absolute_magnitude_h"));
 
@@ -30,6 +32,8 @@ class Asteroid {
 
 		JSONObject orbitalData = asteroidAsJson.getJSONObject("orbital_data");
 		orbitalEccentricity = addDataField("miss distance", orbitalData.getFloat("eccentricity"));
+
+		index = _index;
 	}
 
 	public String toString() {

@@ -7,16 +7,18 @@ class Performance {
 	private EndScene endScene;
 
 	private Asteroids asteroids;
+	private int curAsteroidNum;
 	private Asteroid curAsteroid;
 
 	Performance(Asteroids _asteroids) {
+		curAsteroidNum = (int)random(_asteroids.size());
 		asteroids = _asteroids;
-		curAsteroid = _asteroids.get(0);
+		curAsteroid = _asteroids.get(curAsteroidNum);
 
 		curScene = Scenes.INTRO;
 		introScene = new IntroScene();
 		welcomeScene = new WelcomeScene();
-		playScene = new PlayScene(curAsteroid);
+		playScene = new PlayScene(curAsteroid, _asteroids.size());
 		endScene = new EndScene();
 	}
 
@@ -59,6 +61,8 @@ class Performance {
 	}
 
 	public void handleKey(char keyp) {
+		// TODO - get the actual navigation to work
+		// change asteroid number based on keypress
 		switch (keyp) {
 			case ' ':
 				if (curScene == Scenes.INTRO) {

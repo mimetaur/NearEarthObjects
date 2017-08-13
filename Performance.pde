@@ -76,9 +76,9 @@ class Performance {
 			}
 		} else if (key == CODED) {
 			if (keyCode == LEFT) {
-				println("Left");
+				playScene.prevAsteroid();
 			} else if (keyCode == RIGHT) {
-				println("Right");
+				playScene.nextAsteroid();
 			}
 		}
 	}

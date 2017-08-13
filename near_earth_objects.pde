@@ -1,7 +1,7 @@
 Settings settings;
 Performance performance;
 
-PFont medFont, largeFont;
+PFont smallFont, medFont, largeFont;
 color brightGreen = color(126, 211, 33);
 color semiDarkGreen = color(89, 161, 6);
 color darkGreen = color(65, 117, 5);
@@ -19,6 +19,7 @@ void setup() {
 	settings = new Settings("settings.json");
 	size( 1920, 1080 );
 	background(0);
+	smallFont = loadFont("HydrophiliaIced-28.vlw");
 	medFont = loadFont("HydrophiliaIced-36.vlw");
 	largeFont = loadFont("HydrophiliaIced-48.vlw");
 

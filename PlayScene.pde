@@ -5,7 +5,7 @@ class PlayScene {
 	private Asteroid currentAsteroid;
 
 	private PShape miniLogo;
-	private String asteroidNav;
+	private String asteroidNav, currentlyListening;
 
 	// X offsets for plotting to two columns
 	final private int COLUMN_1_X_OFFSET = 463;
@@ -15,15 +15,32 @@ class PlayScene {
 		asteroids = _asteroids;
 		currentAsteroid = asteroids.get((int)random(asteroids.size()));
 
-		String navTemplate = "[{0}] OF [{1}]";
-		Object[] params = new Object[] { currentAsteroid.index + 1, asteroids.size() + 1 };
-		asteroidNav = MessageFormat.format(navTemplate, params);
-
 		miniLogo = loadShape("mini_logo.svg");
+		currentlyListening = "CURRENTLY LISTENING";
+	}
+
+	public void nextAsteroid() {
+		int index = currentAsteroid.index;
+		if (index == asteroids.size() - 1) {
+			currentAsteroid = asteroids.get(0);
+		} else {
+			currentAsteroid = asteroids.get( index + 1);
+		}
+	}
+
+	public void prevAsteroid() {
+		int index = currentAsteroid.index;
+		if (index == 0) {
+			currentAsteroid = asteroids.get( asteroids.size() - 1 );
+		} else {
+			currentAsteroid = asteroids.get( index - 1);
+		}
 	}
 
 	public void update() {
-
+		String navTemplate = "[{0}] OF [{1}]";
+		Object[] params = new Object[] { currentAsteroid.index + 1, asteroids.size() };
+		asteroidNav = MessageFormat.format(navTemplate, params);
 	}
 
 	public void draw() {
@@ -39,6 +56,11 @@ class PlayScene {
 		// asteroid name
 		textFont(largeFont);
 		text( currentAsteroid.name.toString(), calculateXForItemAt(463), calculateYForItemAt(127) );
+
+		// currently listening
+		textFont(smallFont);
+		fill(darkGreen);
+		text( currentlyListening, calculateXForItemAt(463), calculateYForItemAt(96) );
 
 		// asteroid stats
 

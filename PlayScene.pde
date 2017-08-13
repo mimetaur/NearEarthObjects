@@ -4,8 +4,11 @@ class PlayScene {
 	private Asteroids asteroids;
 	private Asteroid currentAsteroid;
 
-	private PShape miniLogo;
-	private String asteroidNav, currentlyListening;
+	private PShape miniLogo, pauseButton, playButton;
+	private String asteroidNav;
+	private String currentlyListening = "CURRENTLY LISTENING";
+
+	private boolean nowPlaying = false;
 
 	// X offsets for plotting to two columns
 	final private int COLUMN_1_X_OFFSET = 463;
@@ -14,16 +17,25 @@ class PlayScene {
 	PlayScene(Asteroids _asteroids) {
 		asteroids = _asteroids;
 		currentAsteroid = asteroids.get((int)random(asteroids.size()));
-
 		miniLogo = loadShape("mini_logo.svg");
-		currentlyListening = "CURRENTLY LISTENING";
-
-		asteroidChanged();
+		pauseButton = loadShape("pause_button.svg");
+		playButton = loadShape("play_button.svg");
+		playButton.disableStyle();
 	}
 
-	private void asteroidChanged() {
-		println("Current Asteroid has changed to " + currentAsteroid.name);
+	private void hitPlay() {
+		nowPlaying = true;
 		currentAsteroid.outputAsOsc();
+		OscMessage play = new OscMessage("play");
+		play.add(1);
+		oscP5.send(play, remoteLocation);
+	}
+
+	private void hitPause() {
+		nowPlaying = false;
+		OscMessage pause = new OscMessage("play");
+		pause.add(0);
+		oscP5.send(pause, remoteLocation);
 	}
 
 	public void nextAsteroid() {
@@ -33,7 +45,6 @@ class PlayScene {
 		} else {
 			currentAsteroid = asteroids.get( index + 1);
 		}
-		asteroidChanged();
 	}
 
 	public void prevAsteroid() {
@@ -43,7 +54,6 @@ class PlayScene {
 		} else {
 			currentAsteroid = asteroids.get( index - 1);
 		}
-		asteroidChanged();
 	}
 
 	public void update() {
@@ -53,23 +63,40 @@ class PlayScene {
 	}
 
 	public void draw() {
+		// draw buttons
+		if (nowPlaying) {
+			fill(darkGreen);
+			shape( playButton, calculateXForItemAt(1081), calculateYForItemAt(123) );
+			fill(brightGreen);
+			shape( pauseButton, calculateXForItemAt(1163), calculateYForItemAt(124) );
+		} else {
+			fill(brightGreen);
+			shape( playButton, calculateXForItemAt(1081), calculateYForItemAt(123) );
+			fill(darkGreen);
+			shape( pauseButton, calculateXForItemAt(1163), calculateYForItemAt(124) );
+		}
+
 		// draw logo
 		shape( miniLogo, calculateXForItemAt(364), calculateYForItemAt(113) );
 
 		// nav
-		textAlign(LEFT, TOP);
+		textAlign(RIGHT, TOP);
 		fill(brightGreen);
 		textFont(medFont);
-		text( asteroidNav, calculateXForItemAt(269), calculateYForItemAt(206) );
+		text( asteroidNav, calculateXForItemAt(433), calculateYForItemAt(206) );
 
 		// asteroid name
+		textAlign(LEFT, TOP);
 		textFont(largeFont);
 		text( currentAsteroid.name.toString(), calculateXForItemAt(463), calculateYForItemAt(127) );
 
 		// currently listening
-		textFont(smallFont);
-		fill(darkGreen);
-		text( currentlyListening, calculateXForItemAt(463), calculateYForItemAt(96) );
+		if (nowPlaying) {
+			textFont(smallFont);
+			fill(darkGreen);
+			text( currentlyListening, calculateXForItemAt(463), calculateYForItemAt(96) );
+		}
+
 
 		// asteroid stats
 

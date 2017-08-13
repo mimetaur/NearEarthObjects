@@ -22,7 +22,7 @@ class Asteroid {
 		JSONArray closeApproachData = asteroidAsJson.getJSONArray("close_approach_data");
 
 		float relVel = closeApproachData.getJSONObject(0).getJSONObject("relative_velocity").getFloat("kilometers_per_second");
-		relativeVelocity = addDataField("relative velocty", relVel, "kps");
+		relativeVelocity = addDataField("relative velocity", relVel, "kps");
 
 		float missd = closeApproachData.getJSONObject(0).getJSONObject("miss_distance").getFloat("astronomical");
 		missDistance = addDataField("miss distance", missd, "au");
@@ -35,8 +35,6 @@ class Asteroid {
 	}
 
 	public void outputAsOsc() {
-		oscP5.send(new OscMessage("did_change").add(true), remoteLocation);
-
 		outputFieldAsOscString(name);
 		outputFieldAsOscFloat(magnitude);
 		outputFieldAsOscFloat(diameter);

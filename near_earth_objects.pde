@@ -24,14 +24,14 @@ final int MEDIUM_LINE_HEIGHT = 49;
 void setup() {
 	settings = new Settings("settings.json");
 	size( 1920, 1080 );
-	background(0);
+	background(255);
 	smallFont = loadFont("HydrophiliaIced-28.vlw");
 	medFont = loadFont("HydrophiliaIced-36.vlw");
 	largeFont = loadFont("HydrophiliaIced-48.vlw");
 
 	// oscP5 setup. Listening/sending on port 12000 / currently using 127.0.0.1 aka localhost
-	oscP5 = new OscP5(this,12000);
-	remoteLocation = new NetAddress("127.0.0.1",12000);
+	oscP5 = new OscP5(this, 12000);
+	remoteLocation = new NetAddress("127.0.0.1", 12000);
 
 	// switch this over for production
 	JSONObject feed = loadJSONObject( settings.get("NASA_ENDPOINT_URL") + settings.get("NASA_API_KEY"));

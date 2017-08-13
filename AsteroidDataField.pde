@@ -15,7 +15,7 @@ public class AsteroidDataField<T> {
 	}
 
 	public String oscName() {
-		return "/" + fieldName.toLowerCase().replace(" ", "_");
+		return "/" + fieldName.toLowerCase().replace(" ", "_").replace("?", "");
 	}
 
 	public String getName() {

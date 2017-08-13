@@ -10,6 +10,7 @@ class Asteroid {
 	public int index;
 
 	Asteroid(JSONObject asteroidAsJson, int _index) {
+
 		name = addDataField("name", asteroidAsJson.getString("name"));
 		magnitude = addDataField("absolute magnitude (h)", asteroidAsJson.getFloat("absolute_magnitude_h"));
 
@@ -33,24 +34,59 @@ class Asteroid {
 		index = _index;
 	}
 
+	public void outputAsOsc() {
+		outputFieldAsOscString(name);
+		outputFieldAsOscFloat(magnitude);
+		outputFieldAsOscFloat(diameter);
+		outputFieldAsOscBoolean(isPotentiallyHazardous);
+		outputFieldAsOscFloat(relativeVelocity);
+		outputFieldAsOscFloat(missDistance);
+		outputFieldAsOscFloat(orbitalEccentricity);
+	}
+
+	private void outputFieldAsOscString(AsteroidDataField<String> field) {
+		OscMessage msg = new OscMessage( "/" + field.getName() );
+		msg.add( field.getValue() );
+		println(msg);
+		oscP5.send( msg, remoteLocation );
+	}
+
+	private void outputFieldAsOscFloat(AsteroidDataField<Float> field) {
+		OscMessage msg = new OscMessage( "/" + field.getName() );
+		msg.add( field.getValue() );
+		println(msg);
+		oscP5.send( msg, remoteLocation );
+	}
+
+	private void outputFieldAsOscBoolean(AsteroidDataField<Boolean> field) {
+		OscMessage msg = new OscMessage( "/" + field.getName() );
+		msg.add( field.getValue() );
+		println(msg);
+		oscP5.send( msg, remoteLocation );
+	}
+
 	public String toString() {
 		return name.toString();
 	}
 
 	private AsteroidDataField<String> addDataField(String name, String value) {
-		return new AsteroidDataField(name, value);
+		AsteroidDataField newAst = new AsteroidDataField(name, value);
+		return newAst;
 	}
 
 	private AsteroidDataField<Float> addDataField(String name, float value) {
-		return new AsteroidDataField(name, value);
+		AsteroidDataField newAst = new AsteroidDataField(name, value);
+		return newAst;
 	}
 
 	private AsteroidDataField<Float> addDataField(String name, float value, String units) {
-		return new AsteroidDataField(name, value, units);
+		AsteroidDataField newAst = new AsteroidDataField(name, value, units);
+		return newAst;
 	}
 
 	private AsteroidDataField<Boolean> addDataField(String name, boolean value) {
-		return new AsteroidDataField(name, value);
+		AsteroidDataField newAst = new AsteroidDataField(name, value);
+		return newAst;
 	}
 
 	private float calculateMidpoint(String min, String max, JSONObject json) {

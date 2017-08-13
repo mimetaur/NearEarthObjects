@@ -17,6 +17,13 @@ class PlayScene {
 
 		miniLogo = loadShape("mini_logo.svg");
 		currentlyListening = "CURRENTLY LISTENING";
+
+		asteroidChanged();
+	}
+
+	private void asteroidChanged() {
+		println("Current Asteroid has changed to " + currentAsteroid.name);
+		currentAsteroid.outputAsOsc();
 	}
 
 	public void nextAsteroid() {
@@ -26,6 +33,7 @@ class PlayScene {
 		} else {
 			currentAsteroid = asteroids.get( index + 1);
 		}
+		asteroidChanged();
 	}
 
 	public void prevAsteroid() {
@@ -35,6 +43,7 @@ class PlayScene {
 		} else {
 			currentAsteroid = asteroids.get( index - 1);
 		}
+		asteroidChanged();
 	}
 
 	public void update() {

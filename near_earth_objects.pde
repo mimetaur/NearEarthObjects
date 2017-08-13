@@ -1,3 +1,9 @@
+import netP5.*;
+import oscP5.*;
+
+OscP5 oscP5;
+NetAddress remoteLocation;
+
 Settings settings;
 Performance performance;
 
@@ -22,6 +28,10 @@ void setup() {
 	smallFont = loadFont("HydrophiliaIced-28.vlw");
 	medFont = loadFont("HydrophiliaIced-36.vlw");
 	largeFont = loadFont("HydrophiliaIced-48.vlw");
+
+	// oscP5 setup. Listening/sending on port 12000 / currently using 127.0.0.1 aka localhost
+	oscP5 = new OscP5(this,12000);
+	remoteLocation = new NetAddress("127.0.0.1",12000);
 
 	// switch this over for production
 	JSONObject feed = loadJSONObject( settings.get("NASA_ENDPOINT_URL") + settings.get("NASA_API_KEY"));

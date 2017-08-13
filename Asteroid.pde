@@ -12,7 +12,7 @@ class Asteroid {
 	Asteroid(JSONObject asteroidAsJson, int _index) {
 
 		name = addDataField("name", asteroidAsJson.getString("name"));
-		magnitude = addDataField("absolute magnitude (h)", asteroidAsJson.getFloat("absolute_magnitude_h"));
+		magnitude = addDataField("absolute magnitude", asteroidAsJson.getFloat("absolute_magnitude_h"));
 
 		// note - all values use kilometers when a choice is given in API
 		diameter = addDataField("estimated diameter", calculateMidpoint("estimated_diameter_min", "estimated_diameter_min", asteroidAsJson.getJSONObject("estimated_diameter").getJSONObject("kilometers")), "kph");
@@ -35,6 +35,8 @@ class Asteroid {
 	}
 
 	public void outputAsOsc() {
+		oscP5.send(new OscMessage("did_change").add(true), remoteLocation);
+
 		outputFieldAsOscString(name);
 		outputFieldAsOscFloat(magnitude);
 		outputFieldAsOscFloat(diameter);
@@ -45,21 +47,21 @@ class Asteroid {
 	}
 
 	private void outputFieldAsOscString(AsteroidDataField<String> field) {
-		OscMessage msg = new OscMessage( "/" + field.getName() );
+		OscMessage msg = new OscMessage( field.oscName() );
 		msg.add( field.getValue() );
 		println(msg);
 		oscP5.send( msg, remoteLocation );
 	}
 
 	private void outputFieldAsOscFloat(AsteroidDataField<Float> field) {
-		OscMessage msg = new OscMessage( "/" + field.getName() );
+		OscMessage msg = new OscMessage( field.oscName() );
 		msg.add( field.getValue() );
 		println(msg);
 		oscP5.send( msg, remoteLocation );
 	}
 
 	private void outputFieldAsOscBoolean(AsteroidDataField<Boolean> field) {
-		OscMessage msg = new OscMessage( "/" + field.getName() );
+		OscMessage msg = new OscMessage( field.oscName() );
 		msg.add( field.getValue() );
 		println(msg);
 		oscP5.send( msg, remoteLocation );

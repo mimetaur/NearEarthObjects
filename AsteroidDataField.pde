@@ -14,6 +14,10 @@ public class AsteroidDataField<T> {
 		units = _units;
 	}
 
+	public String oscName() {
+		return "/" + fieldName.toLowerCase().replace(" ", "_");
+	}
+
 	public String getName() {
 		return fieldName;
 	}

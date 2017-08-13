@@ -4,7 +4,6 @@ class Asteroid {
 	public AsteroidDataField<Float> diameter;
 	public AsteroidDataField<Boolean> isPotentiallyHazardous;
 	public AsteroidDataField<Float> relativeVelocity;
-	public AsteroidDataField<Float> closeApproachDate;
 	public AsteroidDataField<Float> missDistance;
 	public AsteroidDataField<Float> orbitalEccentricity;
 
@@ -24,14 +23,11 @@ class Asteroid {
 		float relVel = closeApproachData.getJSONObject(0).getJSONObject("relative_velocity").getFloat("kilometers_per_second");
 		relativeVelocity = addDataField("relative velocty", relVel, "kps");
 
-		float epochApproachDate = closeApproachData.getJSONObject(0).getFloat("epoch_date_close_approach");
-		closeApproachDate = addDataField("epoch date of close approach", epochApproachDate);
-
 		float missd = closeApproachData.getJSONObject(0).getJSONObject("miss_distance").getFloat("kilometers");
 		missDistance = addDataField("miss distance", missd, "kilometers");
 
 		JSONObject orbitalData = asteroidAsJson.getJSONObject("orbital_data");
-		orbitalEccentricity = addDataField("miss distance", orbitalData.getFloat("eccentricity"));
+		orbitalEccentricity = addDataField("orbital eccentricity", orbitalData.getFloat("eccentricity"));
 
 		index = _index;
 	}

@@ -6,7 +6,8 @@ class PlayScene {
 
 	private PShape miniLogo, pauseButton, playButton;
 	private String asteroidNav;
-	private String currentlyListening = "CURRENTLY LISTENING";
+	private String currentlyListening = "CURRENTLY LISTENING TO";
+	private String buttonInstructions = "Press [P] to toggle Play / Pause";
 
 	private boolean nowPlaying = false;
 
@@ -21,6 +22,15 @@ class PlayScene {
 		pauseButton = loadShape("pause_button.svg");
 		playButton = loadShape("play_button.svg");
 		playButton.disableStyle();
+		pauseButton.disableStyle();
+	}
+
+	public void togglePlay() {
+		if (nowPlaying) {
+			hitPause();
+		} else {
+			hitPlay();
+		}
 	}
 
 	private void hitPlay() {
@@ -75,6 +85,12 @@ class PlayScene {
 			fill(darkGreen);
 			shape( pauseButton, calculateXForItemAt(1163), calculateYForItemAt(124) );
 		}
+		// draw instructions
+		textAlign(LEFT, TOP);
+		fill(darkGreen);
+		textFont(smallFont);
+		text( buttonInstructions, calculateXForItemAt(1267), calculateYForItemAt(145));
+
 
 		// draw logo
 		shape( miniLogo, calculateXForItemAt(364), calculateYForItemAt(113) );

@@ -57,8 +57,7 @@ class Performance {
 	}
 
 	public void handleKey() {
-		// TODO - get the actual navigation to work
-		// change asteroid number based on keypress
+		// Controls that are valid for all scenes
 		if (key == ' ') {
 			if (curScene == Scenes.INTRO) {
 				curScene = Scenes.WELCOME;
@@ -74,11 +73,17 @@ class Performance {
 				curScene = Scenes.END;
 				println("Switching to End Scene");
 			}
-		} else if (key == CODED) {
-			if (keyCode == LEFT) {
-				playScene.prevAsteroid();
-			} else if (keyCode == RIGHT) {
-				playScene.nextAsteroid();
+		}
+		// controls that are only valid for PLAY
+		if (curScene == Scenes.PLAY) {
+			if (key == 'P' || key == 'p') {
+				playScene.togglePlay();
+			} else if (key == CODED) {
+				if (keyCode == LEFT) {
+					playScene.prevAsteroid();
+				} else if (keyCode == RIGHT) {
+					playScene.nextAsteroid();
+				}
 			}
 		}
 	}

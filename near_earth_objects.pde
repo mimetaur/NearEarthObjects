@@ -3,6 +3,7 @@ Performance performance;
 
 PFont medFont, largeFont;
 color brightGreen = color(126, 211, 33);
+color lighterGreen = color(180, 236, 81);
 color darkGreen = color(65, 117, 5);
 
 // x and y calculations are based on comps

@@ -1,6 +1,8 @@
 class Performance {
 	private Scenes curScene;
+
 	private IntroScene introScene;
+	private WelcomeScene welcomeScene;
 	private PlayScene playScene;
 	private EndScene endScene;
 
@@ -13,6 +15,7 @@ class Performance {
 
 		curScene = Scenes.INTRO;
 		introScene = new IntroScene();
+		welcomeScene = new WelcomeScene();
 		playScene = new PlayScene(curAsteroid);
 		endScene = new EndScene();
 	}
@@ -21,6 +24,9 @@ class Performance {
 		switch (curScene) {
 			case INTRO:
 				introScene.update();
+				break;
+			case WELCOME:
+				welcomeScene.update();
 				break;
 			case PLAY:
 				playScene.update();
@@ -38,6 +44,9 @@ class Performance {
 			case INTRO:
 				introScene.draw();
 				break;
+			case WELCOME:
+				welcomeScene.draw();
+				break;
 			case PLAY:
 				playScene.draw();
 				break;
@@ -53,6 +62,9 @@ class Performance {
 		switch (keyp) {
 			case ' ':
 				if (curScene == Scenes.INTRO) {
+					curScene = Scenes.WELCOME;
+					println("Switching to Welcome Scene");
+				} else if (curScene == Scenes.WELCOME) {
 					curScene = Scenes.PLAY;
 					println("Switching to Play Scene");
 				}

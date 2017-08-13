@@ -19,6 +19,10 @@ class PlayScene {
 		asteroids = _asteroids;
 		currentAsteroid = asteroids.get((int)random(asteroids.size()));
 		miniLogo = loadShape("mini_logo.svg");
+
+		// there is some weird svg fill rule stuff going on
+		// otherwise I wouldn't bother disabling styles
+		// https://github.com/processing/processing/issues/3179
 		pauseButton = loadShape("pause_button.svg");
 		playButton = loadShape("play_button.svg");
 		playButton.disableStyle();

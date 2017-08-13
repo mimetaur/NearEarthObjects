@@ -23,12 +23,13 @@ class Asteroid {
 		float relVel = closeApproachData.getJSONObject(0).getJSONObject("relative_velocity").getFloat("kilometers_per_second");
 		relativeVelocity = addDataField("relative velocty", relVel, "kps");
 
-		float missd = closeApproachData.getJSONObject(0).getJSONObject("miss_distance").getFloat("kilometers");
-		missDistance = addDataField("miss distance", missd, "kilometers");
+		float missd = closeApproachData.getJSONObject(0).getJSONObject("miss_distance").getFloat("astronomical");
+		missDistance = addDataField("miss distance", missd, "au");
 
 		JSONObject orbitalData = asteroidAsJson.getJSONObject("orbital_data");
 		orbitalEccentricity = addDataField("orbital eccentricity", orbitalData.getFloat("eccentricity"));
 
+		// so each asteroid tracks its own position in the asteroids arrayList
 		index = _index;
 	}
 

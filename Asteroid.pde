@@ -15,7 +15,7 @@ class Asteroid {
 		magnitude = addDataField("absolute magnitude", asteroidAsJson.getFloat("absolute_magnitude_h"));
 
 		// note - all values use kilometers when a choice is given in API
-		diameter = addDataField("estimated diameter", calculateMidpoint("estimated_diameter_min", "estimated_diameter_min", asteroidAsJson.getJSONObject("estimated_diameter").getJSONObject("kilometers")), "kph");
+		diameter = addDataField("estimated diameter", calculateMidpoint("estimated_diameter_min", "estimated_diameter_min", asteroidAsJson.getJSONObject("estimated_diameter").getJSONObject("kilometers")), "kilometers");
 
 		isPotentiallyHazardous = addDataField("potentially hazardous?", asteroidAsJson.getBoolean("is_potentially_hazardous_asteroid"));
 

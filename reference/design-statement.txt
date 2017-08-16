@@ -1,0 +1,1 @@
+Each asteroid that passes near Earth has a different story to tell. I will create an interactive application in Processing that tells these stories through sonifying nearby asteroid data from NASA.
